@@ -30,3 +30,26 @@ CREATE TABLE Users (
     -- Role is restricted to two allowed values
     CONSTRAINT chk_users_role CHECK (role IN ('Ticket Manager', 'Football Fan'))
 );
+
+
+-- =========================================================================
+-- 2. CREATE MATCHES TABLE
+-- =========================================================================
+CREATE TABLE Matches (
+    match_id            INT           NOT NULL,
+    fixture             VARCHAR(150)  NOT NULL,
+    tournament_category VARCHAR(100)  NOT NULL,
+    base_ticket_price   NUMERIC(10,2) NOT NULL,
+    match_status        VARCHAR(20)   NOT NULL,
+
+    -- Primary Key constraint on match_id
+    CONSTRAINT pk_matches PRIMARY KEY (match_id),
+
+    -- Ticket price must be zero or positive
+    CONSTRAINT chk_matches_price CHECK (base_ticket_price >= 0),
+
+    -- Match status restricted to four allowed values
+    CONSTRAINT chk_matches_status CHECK (
+        match_status IN ('Available', 'Selling Fast', 'Sold Out', 'Postponed')
+    )
+);
