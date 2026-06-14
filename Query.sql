@@ -140,3 +140,23 @@ WHERE tournament_category = 'Champions League'
 -- ---------+--------------------------+------------------
 --      101 | Real Madrid vs Barcelona |            150.00
 --      103 | Bayern Munich vs PSG     |            130.00
+
+
+-- =========================================================================
+-- QUERY 2: Search for all users whose full names start with 'Tanvir'
+--          or contain the phrase 'Haque' (case-insensitive).
+-- Concepts: LIKE, ILIKE
+-- =========================================================================
+SELECT
+    user_id,
+    full_name,
+    email
+FROM Users
+WHERE full_name ILIKE 'Tanvir%'
+   OR full_name ILIKE '%Haque%';
+
+-- Expected Output:
+-- user_id | full_name     | email
+-- --------+---------------+----------------
+--       1 | Tanvir Rahman | tanvir@mail.com
+--       2 | Asif Haque    | asif@mail.com
