@@ -121,3 +121,22 @@ INSERT INTO Bookings (booking_id, user_id, match_id, seat_number, payment_status
 (503, 2, 101, 'A-13', 'Confirmed', 150.00),
 (504, 2, 101, NULL,   NULL,        150.00),
 (505, 3, 102, 'C-20', 'Pending',   120.00);
+
+
+-- =========================================================================
+-- QUERY 1: Retrieve all upcoming football matches belonging to the
+--          'Champions League' where the match status is 'Available'.
+-- =========================================================================
+SELECT
+    match_id,
+    fixture,
+    base_ticket_price
+FROM Matches
+WHERE tournament_category = 'Champions League'
+  AND match_status = 'Available';
+
+-- Expected Output:
+-- match_id | fixture                  | base_ticket_price
+-- ---------+--------------------------+------------------
+--      101 | Real Madrid vs Barcelona |            150.00
+--      103 | Bayern Munich vs PSG     |            130.00
