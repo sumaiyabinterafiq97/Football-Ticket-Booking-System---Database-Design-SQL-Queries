@@ -160,3 +160,46 @@ WHERE full_name ILIKE 'Tanvir%'
 -- --------+---------------+----------------
 --       1 | Tanvir Rahman | tanvir@mail.com
 --       2 | Asif Haque    | asif@mail.com
+
+
+-- =========================================================================
+-- QUERY 3: Retrieve all booking records where the payment status is
+--          missing (NULL), replacing the empty result with 'Action Required'.
+-- Concepts: IS NULL, COALESCE
+-- =========================================================================
+SELECT
+    booking_id,
+    user_id,
+    match_id,
+    COALESCE(payment_status, 'Action Required') AS systematic_status
+FROM Bookings
+WHERE payment_status IS NULL;
+
+-- Expected Output:
+-- booking_id | user_id | match_id | systematic_status
+-- -----------+---------+----------+------------------
+--        504 |       2 |      101 | Action Required
+
+
+-- =========================================================================
+-- QUERY 4: Retrieve match booking details along with the User's full name
+--          and the scheduled Match fixture teams.
+-- Concepts: INNER JOIN
+-- =========================================================================
+SELECT
+    b.booking_id,
+    u.full_name,
+    m.fixture,
+    b.total_cost
+FROM Bookings b
+INNER JOIN Users   u ON b.user_id  = u.user_id
+INNER JOIN Matches m ON b.match_id = m.match_id;
+
+-- Expected Output:
+-- booking_id | full_name     | fixture                  | total_cost
+-- -----------+---------------+--------------------------+-----------
+--        501 | Tanvir Rahman | Real Madrid vs Barcelona |     150.00
+--        502 | Tanvir Rahman | Man City vs Liverpool    |     120.00
+--        503 | Asif Haque    | Real Madrid vs Barcelona |     150.00
+--        504 | Asif Haque    | Real Madrid vs Barcelona |     150.00
+--        505 | Sajjad Rahman | Man City vs Liverpool    |     120.00
