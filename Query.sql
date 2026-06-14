@@ -203,3 +203,27 @@ INNER JOIN Matches m ON b.match_id = m.match_id;
 --        503 | Asif Haque    | Real Madrid vs Barcelona |     150.00
 --        504 | Asif Haque    | Real Madrid vs Barcelona |     150.00
 --        505 | Sajjad Rahman | Man City vs Liverpool    |     120.00
+
+
+-- =========================================================================
+-- QUERY 5: Display a comprehensive list of all users and their booking IDs,
+--          ensuring fans who have never bought a ticket are still listed.
+-- Concepts: LEFT JOIN
+-- =========================================================================
+SELECT
+    u.user_id,
+    u.full_name,
+    b.booking_id
+FROM Users u
+LEFT JOIN Bookings b ON u.user_id = b.user_id
+ORDER BY u.user_id, b.booking_id;
+
+-- Expected Output:
+-- user_id | full_name     | booking_id
+-- --------+---------------+-----------
+--       1 | Tanvir Rahman |        501
+--       1 | Tanvir Rahman |        502
+--       2 | Asif Haque    |        503
+--       2 | Asif Haque    |        504
+--       3 | Sajjad Rahman |        505
+--       4 | Jannat Ara    |       NULL
