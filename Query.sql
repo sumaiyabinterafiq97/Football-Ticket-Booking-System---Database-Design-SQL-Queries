@@ -227,3 +227,45 @@ ORDER BY u.user_id, b.booking_id;
 --       2 | Asif Haque    |        504
 --       3 | Sajjad Rahman |        505
 --       4 | Jannat Ara    |       NULL
+
+
+-- =========================================================================
+-- QUERY 6: Find all ticket bookings where the total cost is strictly
+--          higher than the average cost of all ticket bookings.
+-- Concepts: Subquery, AVG()
+-- =========================================================================
+SELECT
+    booking_id,
+    match_id,
+    total_cost
+FROM Bookings
+WHERE total_cost > (
+    SELECT AVG(total_cost) FROM Bookings
+);
+
+-- Expected Output:
+-- booking_id | match_id | total_cost
+-- -----------+----------+-----------
+--        501 |      101 |     150.00
+--        503 |      101 |     150.00
+--        504 |      101 |     150.00
+
+
+-- =========================================================================
+-- QUERY 7: Retrieve the top 2 most expensive matches sorted by base ticket
+--          price, skipping the absolute highest premium match.
+-- Concepts: ORDER BY, LIMIT, OFFSET
+-- =========================================================================
+SELECT
+    match_id,
+    fixture,
+    base_ticket_price
+FROM Matches
+ORDER BY base_ticket_price DESC
+LIMIT 2 OFFSET 1;
+
+-- Expected Output (skips Real Madrid vs Barcelona at 150):
+-- match_id | fixture               | base_ticket_price
+-- ---------+-----------------------+------------------
+--      103 | Bayern Munich vs PSG  |            130.00
+--      102 | Man City vs Liverpool |            120.00
