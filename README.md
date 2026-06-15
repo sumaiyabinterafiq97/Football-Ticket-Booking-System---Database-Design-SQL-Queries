@@ -6,6 +6,8 @@ A relational database design and SQL query assignment implementing a **Football 
 
 ## 📐 ERD Diagram
 
+🔗 **[View Public ERD on Google Drive](https://drive.google.com/file/d/1wBQJW6-1fNK13GA5o4Bqk1e4fDQxDHJK/view?usp=sharing)**
+
 ```mermaid
 erDiagram
     USERS {
